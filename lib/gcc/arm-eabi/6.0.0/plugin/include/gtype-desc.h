@@ -1085,6 +1085,10 @@ extern void gt_ggc_mx_basic_block_def (void *);
   if (X != NULL) gt_ggc_mx_edge_def (X);\
   } while (0)
 extern void gt_ggc_mx_edge_def (void *);
+#define gt_ggc_m_16cl_target_option(X) do { \
+  if (X != NULL) gt_ggc_mx_cl_target_option (X);\
+  } while (0)
+extern void gt_ggc_mx_cl_target_option (void *);
 #define gt_ggc_m_7section(X) do { \
   if (X != NULL) gt_ggc_mx_section (X);\
   } while (0)
@@ -2194,6 +2198,10 @@ extern void gt_pch_nx_basic_block_def (void *);
   if (X != NULL) gt_pch_nx_edge_def (X);\
   } while (0)
 extern void gt_pch_nx_edge_def (void *);
+#define gt_pch_n_16cl_target_option(X) do { \
+  if (X != NULL) gt_pch_nx_cl_target_option (X);\
+  } while (0)
+extern void gt_pch_nx_cl_target_option (void *);
 #define gt_pch_n_7section(X) do { \
   if (X != NULL) gt_pch_nx_section (X);\
   } while (0)
@@ -2797,6 +2805,8 @@ extern void gt_pch_p_16machine_function
 extern void gt_pch_p_15basic_block_def
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_8edge_def
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_16cl_target_option
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_7section
     (void *, void *, gt_pointer_operator, void *);

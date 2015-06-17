@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/Users/KangDroid/Desktop/android/git/linaro/android-toolchain-eabi/libexec/gcc/arm-linux-androideabi/6.0.0'
+libdir='/tmp/android-toolchain-eabi/libexec/gcc/arm-linux-androideabi/6.0.0'

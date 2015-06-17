@@ -53,7 +53,7 @@ if [ x$1 != x ] ; then
   prefix=$1
   shift
 else
-  prefix=/Users/KangDroid/Desktop/android/git/linaro/android-toolchain-eabi
+  prefix=/tmp/android-toolchain-eabi
 fi
 
 # Allow for alternate isysroot in which to find headers

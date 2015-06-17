@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "GCC 1"
-.TH GCC 1 "2015-06-14" "gcc-6.0.0" "GNU"
+.TH GCC 1 "2015-06-17" "gcc-6.0.0" "GNU"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -11570,7 +11570,7 @@ corresponding flag to the linker.
 Specify the name of the target architecture, optionally suffixed by one or
 more feature modifiers.  This option has the form
 \&\fB\-march=\fR\fIarch\fR{\fB+\fR[\fBno\fR]\fIfeature\fR}*, where the
-only permissible value for \fIarch\fR is \fBarmv8\-a\fR.
+permissible values for \fIarch\fR are \fBarmv8\-a\fR or \fBarmv8.1\-a\fR.
 The permissible values for \fIfeature\fR are documented in the sub-section
 below.  Additionally on native AArch64 GNU/Linux systems the value
 \&\fBnative\fR is available.  This option causes the compiler to pick the
@@ -11654,6 +11654,18 @@ Enable floating-point instructions.
 Enable Advanced \s-1SIMD\s0 instructions.  This implies floating-point instructions
 are enabled.  This is the default for all current possible values for options
 \&\fB\-march\fR and \fB\-mcpu=\fR.
+.IP "\fBlse\fR" 4
+.IX Item "lse"
+Enable Large System Extension instructions.
+.IP "\fBpan\fR" 4
+.IX Item "pan"
+Enable Privileged Access Never support.
+.IP "\fBlor\fR" 4
+.IX Item "lor"
+Enable Limited Ordering Regions support.
+.IP "\fBrdma\fR" 4
+.IX Item "rdma"
+Enable ARMv8.1 Advanced \s-1SIMD\s0 instructions.
 .PP
 \fIAdapteva Epiphany Options\fR
 .IX Subsection "Adapteva Epiphany Options"

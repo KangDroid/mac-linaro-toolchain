@@ -272,6 +272,7 @@ along with GCC; see the file COPYING3.  If not see
       PUSH_INSERT_PASSES_WITHIN (pass_tree_no_loop)
 	  NEXT_PASS (pass_slp_vectorize, 2);
       POP_INSERT_PASSES ()
+      NEXT_PASS (pass_simduid_cleanup, 1);
       NEXT_PASS (pass_lower_vector_ssa, 1);
       NEXT_PASS (pass_cse_reciprocals, 1);
       NEXT_PASS (pass_reassoc, 2);
