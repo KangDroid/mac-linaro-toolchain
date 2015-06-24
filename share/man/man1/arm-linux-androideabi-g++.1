@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "GCC 1"
-.TH GCC 1 "2015-06-17" "gcc-6.0.0" "GNU"
+.TH GCC 1 "2015-06-24" "gcc-6.0.0" "GNU"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -334,8 +334,8 @@ in the following sections.
 .IX Item "Debugging Options"
 \&\fB\-d\fR\fIletters\fR  \fB\-dumpspecs  \-dumpmachine  \-dumpversion 
 \&\-fsanitize=\fR\fIstyle\fR \fB\-fsanitize\-recover \-fsanitize\-recover=\fR\fIstyle\fR 
-\&\fB\-fasan\-shadow\-offset=\fR\fInumber\fR \fB\-fsanitize\-sections=\fR\fIs1,s2,...\fR 
-\&\fB\-fsanitize\-undefined\-trap\-on\-error 
+\&\fB\-fasan\-shadow\-offset=\fR\fInumber\fR \fB\-fsanitize\-sections=\fR\fIs1\fR\fB,\fR\fIs2\fR\fB,... 
+\&\-fsanitize\-undefined\-trap\-on\-error 
 \&\-fcheck\-pointer\-bounds \-fchkp\-check\-incomplete\-type 
 \&\-fchkp\-first\-field\-has\-own\-bounds \-fchkp\-narrow\-bounds 
 \&\-fchkp\-narrow\-to\-innermost\-array \-fchkp\-optimize 
@@ -5325,7 +5325,7 @@ together.
 This option forces \s-1GCC\s0 to use custom shadow offset in AddressSanitizer checks.
 It is useful for experimenting with different shadow memory layouts in
 Kernel AddressSanitizer.
-.IP "\fB\-fsanitize\-sections=\fR\fIs1,s2,...\fR" 4
+.IP "\fB\-fsanitize\-sections=\fR\fIs1\fR\fB,\fR\fIs2\fR\fB,...\fR" 4
 .IX Item "-fsanitize-sections=s1,s2,..."
 Sanitize global variables in selected user-defined sections.  \fIsi\fR may
 contain wildcards.
@@ -11507,7 +11507,10 @@ Generate big-endian code.  This is the default when \s-1GCC\s0 is configured for
 \&\fBaarch64_be\-*\-*\fR target.
 .IP "\fB\-mgeneral\-regs\-only\fR" 4
 .IX Item "-mgeneral-regs-only"
-Generate code which uses only the general registers.
+Generate code which uses only the general-purpose registers.  This is equivalent
+to feature modifier \fBnofp\fR of \fB\-march\fR or \fB\-mcpu\fR, except
+that \fB\-mgeneral\-regs\-only\fR takes precedence over any conflicting feature
+modifier regardless of sequence.
 .IP "\fB\-mlittle\-endian\fR" 4
 .IX Item "-mlittle-endian"
 Generate little-endian code.  This is the default when \s-1GCC\s0 is configured for an
@@ -11638,22 +11641,24 @@ over the appropriate part of this option.
 \fB\-march\fR and \fB\-mcpu\fR Feature Modifiers
 .IX Subsection "-march and -mcpu Feature Modifiers"
 .PP
-Feature modifiers used with \fB\-march\fR and \fB\-mcpu\fR can be one
-the following:
+Feature modifiers used with \fB\-march\fR and \fB\-mcpu\fR can be any of
+the following and their inverses \fBno\fR\fIfeature\fR:
 .IP "\fBcrc\fR" 4
 .IX Item "crc"
 Enable \s-1CRC\s0 extension.
 .IP "\fBcrypto\fR" 4
 .IX Item "crypto"
-Enable Crypto extension.  This implies Advanced \s-1SIMD\s0 is enabled.
+Enable Crypto extension.  This also enables Advanced \s-1SIMD\s0 and floating-point
+instructions.
 .IP "\fBfp\fR" 4
 .IX Item "fp"
-Enable floating-point instructions.
+Enable floating-point instructions.  This is on by default for all possible
+values for options \fB\-march\fR and \fB\-mcpu\fR.
 .IP "\fBsimd\fR" 4
 .IX Item "simd"
-Enable Advanced \s-1SIMD\s0 instructions.  This implies floating-point instructions
-are enabled.  This is the default for all current possible values for options
-\&\fB\-march\fR and \fB\-mcpu=\fR.
+Enable Advanced \s-1SIMD\s0 instructions.  This also enables floating-point
+instructions.  This is on by default for all possible values for options
+\&\fB\-march\fR and \fB\-mcpu\fR.
 .IP "\fBlse\fR" 4
 .IX Item "lse"
 Enable Large System Extension instructions.
@@ -11666,6 +11671,10 @@ Enable Limited Ordering Regions support.
 .IP "\fBrdma\fR" 4
 .IX Item "rdma"
 Enable ARMv8.1 Advanced \s-1SIMD\s0 instructions.
+.PP
+That is, \fBcrypto\fR implies \fBsimd\fR implies \fBfp\fR.
+Conversely, \fBnofp\fR (or equivalently, \fB\-mgeneral\-regs\-only\fR)
+implies \fBnosimd\fR implies \fBnocrypto\fR.
 .PP
 \fIAdapteva Epiphany Options\fR
 .IX Subsection "Adapteva Epiphany Options"
